@@ -28,77 +28,96 @@ class _RegisterFormState extends State<RegisterForm> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text(
-                'Cadastro',
-                style: TextStyle(fontSize: 24),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Image.asset(
-                AppImages.registerImage,
-                height: 250,
-              ),
-            ),
-            
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: TextField(
-                controller: nameController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Nome:',
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: TextField(
-                controller: emailController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Email:',
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: TextField(
-                controller: passwordController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Senha:',
-                ),
-              ),
-            ),
-            Row(
+        backgroundColor: const Color.fromARGB(158, 255, 216, 171),
+        body: Container(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
-                  onPressed: () {
-                    salvaInfo();
-                  },
-                  child: Text("Cadastrar"),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    'Cadastro',
+                    style: TextStyle(fontSize: 24, color: Colors.black), // Ajuste a cor do texto conforme necessário
+                  ),
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => LoginForm(),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Image.asset(
+                    AppImages.registerImage,
+                    height: 250,
+                  ),
+                ),
+                Card(
+                  elevation: 4.0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: TextField(
+                            controller: nameController,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Nome:',
+                            ),
+                          ),
                         ),
-                      );
-                  },
-                  child: Text("Já tenho uma conta"),
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: TextField(
+                            controller: emailController,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Email:',
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: TextField(
+                            controller: passwordController,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Senha:',
+                            ),
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                salvaInfo();
+                              },
+                              child: Text("Cadastrar"),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => LoginForm(),
+                                  ),
+                                );
+                              },
+                              child: Text("Já tenho uma conta"),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
-          ],
+          ),
         ),
       ),
     );
   }
 }
- 

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pet_adopted/view/cadastro_pet.dart';
+import 'package:pet_adopted/view/cadastro_user.dart';
+import 'package:pet_adopted/view/home_pet.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Grocery Store',
+      title: 'Pet Store',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,

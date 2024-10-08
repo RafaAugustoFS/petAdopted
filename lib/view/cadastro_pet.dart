@@ -3,7 +3,7 @@ import 'package:pet_adopted/constants/images_assets.dart';
 import 'package:pet_adopted/models/pet_model.dart';
 import 'package:pet_adopted/view/home_pet.dart';
 
-class PetForm extends StatefulWidget { 
+class PetForm extends StatefulWidget {
   const PetForm({super.key});
 
   @override
@@ -32,92 +32,120 @@ class _PetFormState extends State<PetForm> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: const Color.fromARGB(158, 255, 216, 171),
         body: Column(
           children: [
             Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(
-                'Login',
+                'Cadastrar novo animal',
                 style: TextStyle(fontSize: 24),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Image.asset(
-                AppImages.loginImage,
-                height: 250,
-              ),
-            ),
-            
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: TextField(
-                controller: speciesController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Espécie:',
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: TextField(
-                controller: nameController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Nome:',
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: TextField(
-                controller: raceController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Raça:',
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: TextField(
-                controller: ageController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Idade:',
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: TextField(
-                controller: locationController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Localização:',
-                ),
-              ),
-            ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
-                  onPressed: () {
-                    salvaInfo();
-                  },
-                  child: Text("Cadastrar"),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Image.asset(
+                    AppImages.cachorroImage,
+                    height: 150,
+                  ),
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => Dashboard(pets: pets),
-                        ),
-                      );
-                  },
-                  child: Text("Voltar"),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Image.asset(
+                    AppImages.gatoImage,
+                    height: 150,
+                  ),
                 ),
               ],
+            ),
+            Expanded(
+              child: Card(
+                elevation: 4.0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: TextField(
+                          controller: speciesController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Espécie:',
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: TextField(
+                          controller: raceController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Raça:',
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: TextField(
+                          controller: nameController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Nome:',
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: TextField(
+                          controller: ageController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Idade:',
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: TextField(
+                          controller: locationController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Localização:',
+                          ),
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {
+                              salvaInfo();
+                            },
+                            child: Text("Cadastrar"),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => Dashboard(pets: pets),
+                                ),
+                              );
+                            },
+                            child: Text("Voltar"),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ],
         ),
@@ -125,4 +153,3 @@ class _PetFormState extends State<PetForm> {
     );
   }
 }
- 
