@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pet_adopted/constants/images_assets.dart';
 import 'package:pet_adopted/models/pet_model.dart';
+import 'package:pet_adopted/view/perfil_pet.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({
@@ -13,32 +15,29 @@ class Dashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Dashboard de Pets'),
-      ),
+          title:
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        Text('Pet adopted'),
+        Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Image.asset(
+            AppImages.user,
+            height: 40,
+          ),
+        ),
+      ])),
       body: Column(
         children: [
-          // Cabeçalho com imagens de pets
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Image.asset(
-                    'caminho/para/imagem/cachorro.png', // Substitua pelo caminho da imagem do cachorro
-                    height: 100,
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Image.asset(
-                    'caminho/para/imagem/gato.png', // Substitua pelo caminho da imagem do gato
-                    height: 100,
-                  ),
-                ),
-              ],
+            padding: EdgeInsets.all(8.0),
+            child: Image.asset(
+              AppImages.logo,
+              height: 180,
             ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text('Animais disponíveis para adoção:'),
           ),
           Expanded(
             child: ListView.builder(
@@ -46,57 +45,88 @@ class Dashboard extends StatelessWidget {
               itemBuilder: (context, index) {
                 final pet = pets[index];
 
-                return Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Card(
-                    elevation: 5,
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(width: 20),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Espécie: ${pet.species}",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
+                String imagePath;
+                if (pet.species.toLowerCase() == 'cachorro') {
+                  imagePath = AppImages.cachorroImage;
+                } else if (pet.species.toLowerCase() == 'gato') {
+                  imagePath = AppImages.gatoImage;
+                } else {
+                  imagePath = AppImages.defaultAnimal;
+                }
+
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PetDetailPage(pet: pet),
+                      ),
+                    );
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Card(
+                      elevation: 5,
+                      child: Padding(
+                        padding: EdgeInsets.all(10.0),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(width: 20),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Espécie: ${pet.species}",
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    "Raça: ${pet.race}",
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    "Nome: ${pet.name}",
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  SizedBox(height: 8),
+                                  Text(
+                                    "Idade: ${pet.age}",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  SizedBox(height: 8),
+                                  Text(
+                                    "Localização: ${pet.location}",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Image.asset(
+                                  imagePath,
+                                  height: 100,
                                 ),
                               ),
-                              Text(
-                                "Nome: ${pet.name}",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                "Raça: ${pet.race}",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              SizedBox(height: 8),
-                              Text(
-                                "Idade: ${pet.age}",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                ),
-                              ),
-                              SizedBox(height: 8),
-                              Text(
-                                "Localização: ${pet.location}",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
