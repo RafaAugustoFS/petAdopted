@@ -28,7 +28,7 @@ class _RegisterFormState extends State<RegisterForm> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: const Color.fromARGB(158, 255, 216, 171),
+        backgroundColor: Color.fromARGB(158, 255, 216, 171),
         body: Container(
           child: Center(
             child: Column(

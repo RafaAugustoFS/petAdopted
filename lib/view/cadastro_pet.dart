@@ -32,7 +32,7 @@ class _PetFormState extends State<PetForm> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: const Color.fromARGB(158, 255, 216, 171),
+        backgroundColor: Color.fromARGB(158, 255, 216, 171),
         body: Column(
           children: [
             Padding(

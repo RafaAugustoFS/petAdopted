@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pet_adopted/constants/images_assets.dart';
 import 'package:pet_adopted/models/pet_model.dart';
+import 'package:pet_adopted/view/cadastro_user.dart';
 import 'package:pet_adopted/view/perfil_pet.dart';
 
 class Dashboard extends StatelessWidget {
@@ -15,17 +16,31 @@ class Dashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title:
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        Text('Pet adopted'),
-        Padding(
+  backgroundColor: Color.fromARGB(158, 255, 216, 171),
+  title: Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      Text('Pet adopted'),
+      GestureDetector(
+        onTap: () {
+          // Navegar para outra página
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => RegisterForm()), // Substitua por sua página
+          );
+        },
+        child: Padding(
           padding: EdgeInsets.all(8.0),
           child: Image.asset(
             AppImages.user,
             height: 40,
           ),
         ),
-      ])),
+      ),
+    ],
+  ),
+),
+
       body: Column(
         children: [
           Padding(
