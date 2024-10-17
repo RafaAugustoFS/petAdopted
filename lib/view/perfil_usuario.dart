@@ -37,6 +37,7 @@ class ShowUser extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(width: 20),
+                  
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -73,4 +74,3 @@ class ShowUser extends StatelessWidget {
     );
   }
 }
- 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pet_adopted/constants/images_assets.dart';
 import 'package:pet_adopted/models/pet_model.dart';
+import 'package:pet_adopted/widgets/buildInfoCard.dart';
 
 class PetDetailPage extends StatelessWidget {
   final PetModel pet;
@@ -35,31 +36,17 @@ class PetDetailPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 16),
-              _buildInfoCard("Espécie: ${pet.species}"),
-              _buildInfoCard("Raça: ${pet.race}"),
-              _buildInfoCard("Nome: ${pet.name}"),
-              _buildInfoCard("Idade: ${pet.age}"),
-              _buildInfoCard("Localização: ${pet.location}"),
+              infoCard(info: "Espécie: ${pet.species}"),
+              infoCard(info: "Raça: ${pet.race}"),
+              infoCard(info: "Nome: ${pet.name}"),
+              infoCard(info: "Idade: ${pet.age}"),
+              infoCard(info: "Localização: ${pet.location}"),
             ],
           ),
         ),
       ),
     );
   }
-
-  Widget _buildInfoCard(String info) {
-    return Card(
-      margin: EdgeInsets.symmetric(vertical: 8),
-      elevation: 4,
-      child: Padding(
-        padding: EdgeInsets.all(16),
-        child: Text(
-          info,
-          style: TextStyle(
-            fontSize: 20,
-          ),
-        ),
-      ),
-    );
-  }
 }
+
+
