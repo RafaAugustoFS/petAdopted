@@ -13,7 +13,7 @@ class PetDetailPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Detalhes do Pet'),
-        backgroundColor: Color.fromARGB(158, 255, 216, 171), // Cor do AppBar
+        backgroundColor: Color(0xFFDFF2EB), // Cor do AppBar
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

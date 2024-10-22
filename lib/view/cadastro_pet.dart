@@ -32,7 +32,7 @@ class _PetFormState extends State<PetForm> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color.fromARGB(158, 255, 216, 171),
+        backgroundColor: Color(0xFFDFF2EB),
         body: Column(
           children: [
             Padding(
@@ -63,6 +63,7 @@ class _PetFormState extends State<PetForm> {
             ),
             Expanded(
               child: Card(
+                color: Color(0xFFB9E5E8),
                 elevation: 4.0,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
