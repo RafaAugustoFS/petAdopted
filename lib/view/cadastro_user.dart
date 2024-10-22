@@ -28,84 +28,114 @@ class _RegisterFormState extends State<RegisterForm> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color.fromARGB(158, 255, 216, 171),
+        backgroundColor:  Color(0xFFDFF2EB),
         body: Container(
+          padding: EdgeInsets.symmetric(horizontal: 16.0),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    'Cadastro',
-                    style: TextStyle(fontSize: 24, color: Colors.black), // Ajuste a cor do texto conforme necessário
+                Text(
+                  'Bem-vindo!',
+                  style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Image.asset(
-                    AppImages.registerImage,
-                    height: 250,
-                  ),
+                SizedBox(height: 20),
+                Image.asset(
+                  AppImages.loginImage,
+                  height: 200,
                 ),
+                SizedBox(height: 30),
                 Card(
-                  elevation: 4.0,
+                  color: Color(0xFFB9E5E8),
+                  elevation: 5.0,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+                    borderRadius: BorderRadius.circular(20.0),
                   ),
                   child: Padding(
-                    padding: EdgeInsets.all(16.0),
+                    padding: EdgeInsets.all(24.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: TextField(
-                            controller: nameController,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: 'Nome:',
+                        TextField(
+                          controller: nameController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15.0),
                             ),
+                            labelText: 'Nome',
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: TextField(
-                            controller: emailController,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: 'Email:',
+                        SizedBox(height: 15),
+                        TextField(
+                          controller: emailController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15.0),
                             ),
+                            labelText: 'Email',
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: TextField(
-                            controller: passwordController,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: 'Senha:',
+                        SizedBox(height: 15),
+                        TextField(
+                          controller: passwordController,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15.0),
                             ),
+                            labelText: 'Senha',
                           ),
                         ),
+                        SizedBox(height: 20),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             ElevatedButton(
                               onPressed: () {
                                 salvaInfo();
-                              },
-                              child: Text("Cadastrar"),
-                            ),
-                            ElevatedButton(
-                              onPressed: () {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (context) => LoginForm(),
                                   ),
                                 );
                               },
-                              child: Text("Já tenho uma conta"),
+                              style: ElevatedButton.styleFrom(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 30, vertical: 15),
+                                backgroundColor: Color(0xFF7AB2D3),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                ),
+                              ),
+                              child: Text(
+                                "Cadastrar",
+                                style: TextStyle(fontSize: 16),
+                              ),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                salvaInfo();
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => LoginForm(),
+                                  ),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 30, vertical: 15),
+                                backgroundColor: Color(0xFF7AB2D3),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                ),
+                              ),
+                              child: Text(
+                                "Login",
+                                style: TextStyle(fontSize: 16),
+                              ),
                             ),
                           ],
                         ),
