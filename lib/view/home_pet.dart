@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pet_adopted/constants/images_assets.dart';
 import 'package:pet_adopted/models/pet_model.dart';
+import 'package:pet_adopted/view/cadastro_pet.dart';
 import 'package:pet_adopted/view/perfil_pet.dart';
 import 'package:pet_adopted/view/perfil_usuario.dart';
 
@@ -16,30 +17,29 @@ class Dashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-  backgroundColor:  Color(0xFFDFF2EB),
-  title: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      Text('Pet adopted'),
-      GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => ShowUser(users: [],)),
-          );
-        },
-        child: Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Image.asset(
-            AppImages.user,
-            height: 40,
-          ),
+        backgroundColor: Color(0xFFDFF2EB),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text('Pet Adopted', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ShowUser(users: [])),
+                );
+              },
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Image.asset(
+                  AppImages.user,
+                  height: 40,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
-    ],
-  ),
-),
-
       body: Column(
         children: [
           Padding(
@@ -50,8 +50,11 @@ class Dashboard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text('Animais disponíveis para adoção:'),
+            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              'Animais disponíveis para adoção:',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
           ),
           Expanded(
             child: ListView.builder(
@@ -80,9 +83,12 @@ class Dashboard extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.all(16.0),
                     child: Card(
-                      elevation: 5,
+                      elevation: 8,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
                       child: Padding(
-                        padding: EdgeInsets.all(10.0),
+                        padding: EdgeInsets.all(16.0),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -93,49 +99,37 @@ class Dashboard extends StatelessWidget {
                                 children: [
                                   Text(
                                     "Espécie: ${pet.species}",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                                   ),
                                   Text(
                                     "Raça: ${pet.race}",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                                   ),
                                   Text(
                                     "Nome: ${pet.name}",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                                   ),
                                   SizedBox(height: 8),
                                   Text(
                                     "Idade: ${pet.age}",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                    ),
+                                    style: TextStyle(fontSize: 16),
                                   ),
                                   SizedBox(height: 8),
                                   Text(
                                     "Localização: ${pet.location}",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                    ),
+                                    style: TextStyle(fontSize: 16),
                                   ),
                                 ],
                               ),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Align(
-                                alignment: Alignment.center,
+                              child: ClipOval(
                                 child: Image.asset(
                                   imagePath,
                                   height: 100,
+                                  width: 100,
+                                  fit: BoxFit.cover,
                                 ),
                               ),
                             ),
@@ -149,6 +143,16 @@ class Dashboard extends StatelessWidget {
             ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => PetForm()),
+          );
+        },
+        child: Icon(Icons.add),
+        backgroundColor: Color(0xFF7AB2D3), 
       ),
     );
   }
