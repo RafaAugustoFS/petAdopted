@@ -99,7 +99,7 @@ class _LoginFormState extends State<LoginForm> {
                                 salvaInfo();
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
-                                    builder: (context) => Dashboard(pets: []),
+                                    builder: (context) => Dashboard(),
                                   ),
                                 );
                               },

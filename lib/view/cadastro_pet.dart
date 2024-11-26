@@ -128,6 +128,11 @@ class _PetFormState extends State<PetForm> {
                           ElevatedButton(
                             onPressed: () {
                               salvaInfo();
+                               Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => Dashboard(),
+                                ),
+                              );
                             },
                             child: Text("Cadastrar"),
                           ),
@@ -135,7 +140,7 @@ class _PetFormState extends State<PetForm> {
                             onPressed: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) => Dashboard(pets: pets),
+                                  builder: (context) => Dashboard(),
                                 ),
                               );
                             },
