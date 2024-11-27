@@ -11,22 +11,13 @@ class PetForm extends StatefulWidget {
 }
 
 class _PetFormState extends State<PetForm> {
-  TextEditingController speciesController = TextEditingController();
+  TextEditingController colorController = TextEditingController();
   TextEditingController nameController = TextEditingController();
-  TextEditingController raceController = TextEditingController();
+  TextEditingController weightController = TextEditingController();
   TextEditingController ageController = TextEditingController();
-  TextEditingController locationController = TextEditingController();
+  TextEditingController imageController = TextEditingController();
   List<PetModel> pets = [];
 
-  void salvaInfo() {
-    pets.add(PetModel(
-      species: speciesController.text,
-      name: nameController.text,
-      race: raceController.text,
-      age: ageController.text,
-      location: locationController.text,
-    ));
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +66,7 @@ class _PetFormState extends State<PetForm> {
                       Padding(
                         padding: EdgeInsets.all(8.0),
                         child: TextField(
-                          controller: speciesController,
+                          controller: colorController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             labelText: 'Espécie:',
@@ -85,7 +76,7 @@ class _PetFormState extends State<PetForm> {
                       Padding(
                         padding: EdgeInsets.all(8.0),
                         child: TextField(
-                          controller: raceController,
+                          controller: weightController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             labelText: 'Raça:',
@@ -112,22 +103,21 @@ class _PetFormState extends State<PetForm> {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: TextField(
-                          controller: locationController,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: 'Localização:',
-                          ),
-                        ),
-                      ),
+                      // Padding(
+                      //   padding: EdgeInsets.all(8.0),
+                      //   child: TextField(
+                      //     controller: locationController,
+                      //     decoration: InputDecoration(
+                      //       border: OutlineInputBorder(),
+                      //       labelText: 'Localização:',
+                      //     ),
+                      //   ),
+                      // ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           ElevatedButton(
                             onPressed: () {
-                              salvaInfo();
                                Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) => Dashboard(),

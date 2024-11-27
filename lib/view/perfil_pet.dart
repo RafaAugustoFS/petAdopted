@@ -21,26 +21,25 @@ class PetDetailPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(
-                child: ClipOval(
-                  child: Image.asset(
-                    pet.species.toLowerCase() == 'cachorro'
-                        ? AppImages.cachorroImage
-                        : pet.species.toLowerCase() == 'gato'
-                            ? AppImages.gatoImage
-                            : AppImages.defaultAnimal,
-                    height: 150,
-                    width: 150,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
+              // Center(
+              //   child: ClipOval(
+              //     child: Image.asset(
+              //       pet.species.toLowerCase() == 'cachorro'
+              //           ? AppImages.cachorroImage
+              //           : pet.species.toLowerCase() == 'gato'
+              //               ? AppImages.gatoImage
+              //               : AppImages.defaultAnimal,
+              //       height: 150,
+              //       width: 150,
+              //       fit: BoxFit.cover,
+              //     ),
+              //   ),
+              // ),
               SizedBox(height: 16),
-              infoCard(info: "Espécie: ${pet.species}"),
-              infoCard(info: "Raça: ${pet.race}"),
+              infoCard(info: "Espécie: ${pet.age}"),
+              infoCard(info: "Raça: ${pet.color}"),
               infoCard(info: "Nome: ${pet.name}"),
-              infoCard(info: "Idade: ${pet.age}"),
-              infoCard(info: "Localização: ${pet.location}"),
+              infoCard(info: "Idade: ${pet.weight}")
             ],
           ),
         ),

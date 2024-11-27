@@ -1,7 +1,7 @@
 class PetModel {
   final String name;
-  final String age;
-  final String weight;
+  final int age;
+  final double weight;
   final String color;
   final List<String> images;
  
