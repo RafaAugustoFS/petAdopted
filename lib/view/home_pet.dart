@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet_adopted/constants/images_assets.dart';
-import 'package:pet_adopted/models/pet_model.dart'; // Usando o modelo PetModel
+import 'package:pet_adopted/models/pet_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'package:pet_adopted/view/cadastro_pet.dart';
@@ -39,7 +39,7 @@ class _DashboardState extends State<Dashboard> {
               .toList();
           isLoading = false;
         });
-      } else {
+      } else {  
         setState(() {
           errorMessage = 'Falha ao carregar os dados. Código: ${response.statusCode}';
           isLoading = false;

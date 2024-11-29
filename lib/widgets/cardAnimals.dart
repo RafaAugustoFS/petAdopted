@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pet_adopted/constants/images_assets.dart';
 import 'package:pet_adopted/models/pet_model.dart'; // Usando o modelo PetModel para mapear os dados
 
 class CardAnimals extends StatelessWidget {

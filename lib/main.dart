@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pet_adopted/view/cadastro_pet.dart';
 import 'package:pet_adopted/view/home_pet.dart';
-import 'package:pet_adopted/view/login_user.dart';
 
 void main() {
   runApp(const MyApp());
