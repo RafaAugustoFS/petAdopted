@@ -1,4 +1,6 @@
+import 'dart:convert'; // Para manipulação de JSON
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http; // Para fazer a requisição HTTP
 import 'package:pet_adopted/constants/images_assets.dart';
 import 'package:pet_adopted/models/user_model.dart';
 import 'package:pet_adopted/view/cadastro_user.dart';
@@ -12,24 +14,67 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
-  TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  List<UserModel> users = [];
 
-  void salvaInfo() {
-    users.add(UserModel(
-      name: nameController.text,
-      email: emailController.text,
-      password: passwordController.text,
-    ));
+  // Função para enviar dados de login
+  Future<void> loginUser() async {
+    final email = emailController.text;
+    final password = passwordController.text;
+
+    if (email.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Por favor, preencha todos os campos.')),
+      );
+      return;
+    }
+
+    final url = Uri.parse('https://pet-adopt-dq32j.ondigitalocean.app/user/login');
+
+    // Corpo da requisição em formato JSON
+    final body = json.encode({
+      'email': email,
+      'password': password,
+    });
+
+    try {
+      final response = await http.post(
+        url,
+        headers: {'Content-Type': 'application/json'},
+        body: body,
+      );
+
+      if (response.statusCode == 200) {
+        // Se a resposta for bem-sucedida, navega para a tela de Dashboard (ou Home)
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Login realizado com sucesso!')),
+        );
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => Dashboard(), // Tela de destino após login
+          ),
+        );
+      } else {
+        // Se a resposta for erro, mostra mensagem de erro
+        final responseBody = json.decode(response.body);
+        String errorMessage = responseBody['message'] ?? 'Erro ao realizar login';
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(errorMessage)),
+        );
+      }
+    } catch (e) {
+      // Se ocorrer um erro na requisição
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Erro ao conectar. Tente novamente.')),
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor:  Color(0xFFDFF2EB),
+        backgroundColor: Color(0xFFDFF2EB),
         body: Container(
           padding: EdgeInsets.symmetric(horizontal: 16.0),
           child: Center(
@@ -61,16 +106,6 @@ class _LoginFormState extends State<LoginForm> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         TextField(
-                          controller: nameController,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15.0),
-                            ),
-                            labelText: 'Nome',
-                          ),
-                        ),
-                        SizedBox(height: 15),
-                        TextField(
                           controller: emailController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -96,12 +131,7 @@ class _LoginFormState extends State<LoginForm> {
                           children: [
                             ElevatedButton(
                               onPressed: () {
-                                salvaInfo();
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) => Dashboard(),
-                                  ),
-                                );
+                                loginUser(); // Chama a função para fazer login
                               },
                               style: ElevatedButton.styleFrom(
                                 padding: EdgeInsets.symmetric(
