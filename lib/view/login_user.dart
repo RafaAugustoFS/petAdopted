@@ -2,9 +2,9 @@ import 'dart:convert'; // Para manipulação de JSON
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http; // Para fazer a requisição HTTP
 import 'package:pet_adopted/constants/images_assets.dart';
-import 'package:pet_adopted/models/user_model.dart';
 import 'package:pet_adopted/view/cadastro_user.dart';
 import 'package:pet_adopted/view/home_pet.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -21,6 +21,8 @@ class _LoginFormState extends State<LoginForm> {
   Future<void> loginUser() async {
     final email = emailController.text;
     final password = passwordController.text;
+    String _errorMessage = "";
+  String? _authToken;
 
     if (email.isEmpty || password.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -45,22 +47,38 @@ class _LoginFormState extends State<LoginForm> {
       );
 
       if (response.statusCode == 200) {
-        // Se a resposta for bem-sucedida, navega para a tela de Dashboard (ou Home)
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Login realizado com sucesso!')),
-        );
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => Dashboard(), // Tela de destino após login
-          ),
-        );
+        final responseData = jsonDecode(response.body);
+
+        if (responseData['token'] != null) {
+          // Armazenar o token nas SharedPreferences
+          final prefs = await SharedPreferences.getInstance();
+          await prefs.setString('user_token', responseData['token']);
+
+          setState(() {
+            _authToken = responseData['token'];
+            _errorMessage = "";
+          });
+
+          print('Token armazenado: $_authToken');
+
+          // Navegar para a próxima tela
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Dashboard()),
+          );
+        } else {
+          setState(() {
+            ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Login falhou. Tente novamente.")),
+      );
+          });
+        }
       } else {
-        // Se a resposta for erro, mostra mensagem de erro
-        final responseBody = json.decode(response.body);
-        String errorMessage = responseBody['message'] ?? 'Erro ao realizar login';
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(errorMessage)),
-        );
+        setState(() {
+          ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Erro ao fazer login. Código: ${response.statusCode}")),
+      );
+        });
       }
     } catch (e) {
       // Se ocorrer um erro na requisição

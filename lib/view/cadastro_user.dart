@@ -17,6 +17,7 @@ class _RegisterFormState extends State<RegisterForm> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController(); // Novo controlador para a confirmação da senha
+  TextEditingController phoneController = TextEditingController(); // Novo controlador para o telefone
   List<UserModel> users = [];
 
   // Função para enviar os dados para a API
@@ -36,6 +37,8 @@ class _RegisterFormState extends State<RegisterForm> {
       'name': nameController.text,
       'email': emailController.text,
       'password': passwordController.text,
+      'confirmpassword': confirmPasswordController.text,
+      'phone': phoneController.text, // Adicionando o telefone ao corpo da requisição
     });
 
     try {
@@ -47,21 +50,23 @@ class _RegisterFormState extends State<RegisterForm> {
       );
 
       if (response.statusCode == 200) {
-        // Se a resposta for bem-sucedida, navega para a tela de login
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Cadastro realizado com sucesso!')),
-        );
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => LoginForm(),
-          ),
-        );
-      } else {
-        // Se a resposta for erro, mostra mensagem
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Erro ao cadastrar. Tente novamente.')),
-        );
-      }
+  // Se a resposta for bem-sucedida, navega para a tela de login
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(content: Text('Cadastro realizado com sucesso!')),
+  );
+  Navigator.of(context).push(
+    MaterialPageRoute(
+      builder: (context) => LoginForm(),
+    ),
+  );
+} else {
+  // Exibe código de erro e corpo da resposta para diagnóstico
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(content: Text('Erro: ${response.statusCode} - ${response.body}')),
+  );
+  print('Erro ao cadastrar. Status code: ${response.statusCode}');
+  print('Resposta da API: ${response.body}');
+}
     } catch (e) {
       // Se ocorrer um erro ao fazer a requisição
       ScaffoldMessenger.of(context).showSnackBar(
@@ -144,6 +149,17 @@ class _RegisterFormState extends State<RegisterForm> {
                               borderRadius: BorderRadius.circular(15.0),
                             ),
                             labelText: 'Confirmar Senha',
+                          ),
+                        ),
+                        SizedBox(height: 15),
+                        TextField(
+                          controller: phoneController,
+                          keyboardType: TextInputType.phone, // Definir o tipo de teclado para número de telefone
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                            labelText: 'Telefone',
                           ),
                         ),
                         SizedBox(height: 20),

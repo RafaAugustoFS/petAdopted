@@ -4,8 +4,8 @@ import 'package:pet_adopted/models/pet_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'package:pet_adopted/view/cadastro_pet.dart';
+import 'package:pet_adopted/view/cadastro_user.dart';
 import 'package:pet_adopted/view/perfil_pet.dart';
-import 'package:pet_adopted/view/perfil_usuario.dart';
 import 'package:pet_adopted/widgets/cardAnimals.dart';
 
 class Dashboard extends StatefulWidget {
@@ -66,7 +66,7 @@ class _DashboardState extends State<Dashboard> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ShowUser(users: [])),
+                  MaterialPageRoute(builder: (context) => RegisterForm()),
                 );
               },
               child: Padding(
