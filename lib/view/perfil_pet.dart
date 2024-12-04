@@ -34,6 +34,7 @@ class PetDetailPage extends StatelessWidget {
               ),
               SizedBox(height: 16),
               infoCard(info: "Nome: ${pet.name}"),
+              infoCard(info: "Cor: ${pet.color}"),
               infoCard(info: "Idade: ${pet.age} anos"),
               infoCard(info: "Raça: ${pet.color}"),
               infoCard(info: "Peso: ${pet.weight} kg")
