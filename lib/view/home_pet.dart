@@ -16,14 +16,14 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  List<PetModel> pets = []; // Lista de pets do tipo PetModel
-  bool isLoading = true; // Para mostrar um indicador de carregamento
+  List<PetModel> pets = [];
+  bool isLoading = true;
   String errorMessage = '';
 
   @override
   void initState() {
     super.initState();
-    fetchPets(); // Chama a função que vai buscar os dados da API
+    fetchPets();
   }
 
   Future<void> fetchPets() async {
@@ -39,7 +39,7 @@ class _DashboardState extends State<Dashboard> {
               .toList();
           isLoading = false;
         });
-      } else {  
+      } else {
         setState(() {
           errorMessage = 'Falha ao carregar os dados. Código: ${response.statusCode}';
           isLoading = false;
@@ -57,11 +57,14 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFFDFF2EB),
+        backgroundColor: Color(0xFF7AB2D3), // Cor mais vibrante
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Pet Adopted', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+            Text(
+              'Pet Adopted',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
             GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -83,14 +86,19 @@ class _DashboardState extends State<Dashboard> {
       body: isLoading
           ? Center(child: CircularProgressIndicator()) // Indicador de carregamento
           : pets.isEmpty
-              ? Center(child: Text(errorMessage.isEmpty ? 'No pets available' : errorMessage))
+              ? Center(
+                  child: Text(
+                    errorMessage.isEmpty ? 'No pets available' : errorMessage,
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                )
               : Column(
                   children: [
                     Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Image.asset(
                         AppImages.logo,
-                        height: 180,
+                        height: 180,  
                       ),
                     ),
                     Padding(
@@ -101,8 +109,10 @@ class _DashboardState extends State<Dashboard> {
                       ),
                     ),
                     Expanded(
-                      child: ListView.builder(
+                      child: ListView.separated(
+                        padding: EdgeInsets.symmetric(vertical: 16.0),
                         itemCount: pets.length,
+                        separatorBuilder: (context, index) => Divider(),
                         itemBuilder: (context, index) {
                           final pet = pets[index];
 
@@ -116,7 +126,7 @@ class _DashboardState extends State<Dashboard> {
                               );
                             },
                             child: Padding(
-                              padding: EdgeInsets.all(16.0),
+                              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                               child: Card(
                                 elevation: 8,
                                 shape: RoundedRectangleBorder(
@@ -127,10 +137,10 @@ class _DashboardState extends State<Dashboard> {
                                   child: Row(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      SizedBox(width: 20),
+                                      SizedBox(width: 16),
                                       Expanded(
                                         child: CardAnimals(
-                                          pet: pet, // Passando o pet completo
+                                          pet: pet,
                                           isNetworkImage: pet.imageUrl.startsWith('http'),
                                         ),
                                       ),
@@ -153,7 +163,7 @@ class _DashboardState extends State<Dashboard> {
           );
         },
         child: Icon(Icons.add),
-        backgroundColor: Color(0xFF7AB2D3),
+        backgroundColor: Color(0xFF7AB2D3), // Cor mais vibrante
       ),
     );
   }

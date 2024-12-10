@@ -1,6 +1,6 @@
-import 'dart:convert';  // Para trabalhar com JSON
+import 'dart:convert'; // Para trabalhar com JSON
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;  // Para fazer requisição HTTP
+import 'package:http/http.dart' as http; // Para fazer requisição HTTP
 import 'package:pet_adopted/constants/images_assets.dart';
 import 'package:pet_adopted/models/pet_model.dart';
 import 'package:pet_adopted/view/home_pet.dart';
@@ -18,21 +18,31 @@ class _PetFormState extends State<PetForm> {
   TextEditingController colorController = TextEditingController();
   TextEditingController weightController = TextEditingController();
   TextEditingController ageController = TextEditingController();
-  TextEditingController imageController = TextEditingController(); // Corrigido para 'location'
+  TextEditingController genderController = TextEditingController();
+  TextEditingController raceController = TextEditingController();
+  TextEditingController categoryController = TextEditingController();
+  TextEditingController imageController = TextEditingController();
   List<PetModel> pets = [];
 
   // Função para enviar os dados para a API
   Future<void> submitPetForm() async {
     // Verificando se os campos estão preenchidos
-    if (nameController.text.isEmpty || colorController.text.isEmpty || 
-        weightController.text.isEmpty || ageController.text.isEmpty || imageController.text.isEmpty) {
+    if (nameController.text.isEmpty ||
+        colorController.text.isEmpty ||
+        weightController.text.isEmpty ||
+        ageController.text.isEmpty ||
+        genderController.text.isEmpty ||
+        raceController.text.isEmpty ||
+        categoryController.text.isEmpty ||
+        imageController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Por favor, preencha todos os campos.')),
       );
       return;
     }
 
-    final url = Uri.parse('https://pet-adopt-dq32j.ondigitalocean.app/pet/create');
+    final url =
+        Uri.parse('https://pet-adopt-dq32j.ondigitalocean.app/pet/create');
 
     final prefs = await SharedPreferences.getInstance();
     final String? token = prefs.getString('user_token');
@@ -50,6 +60,9 @@ class _PetFormState extends State<PetForm> {
       'color': colorController.text,
       'weight': weightController.text,
       'age': ageController.text,
+      'gender': genderController.text,
+      'race': raceController.text,
+      'category': categoryController.text,
       'images': imageController.text,
     });
 
@@ -68,7 +81,7 @@ class _PetFormState extends State<PetForm> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Pet cadastrado com sucesso!')),
         );
-        
+
         // Volta para a tela inicial após o cadastro
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => Dashboard()),
@@ -79,7 +92,7 @@ class _PetFormState extends State<PetForm> {
           SnackBar(content: Text('Erro ao cadastrar. Tente novamente.')),
         );
         print('Erro ao cadastrar. Status code: ${response.statusCode}');
-  print('Resposta da API: ${response.body}');
+        print('Resposta da API: ${response.body}');
       }
     } catch (e) {
       // Se ocorrer um erro de conexão
@@ -94,37 +107,37 @@ class _PetFormState extends State<PetForm> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0xFFDFF2EB),
-        body: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text(
-                'Cadastrar novo animal',
-                style: TextStyle(fontSize: 24),
+        backgroundColor: Color(0xFF7AB2D3),
+        body: SingleChildScrollView( // Adiciona o scroll
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  'Cadastrar novo animal',
+                  style: TextStyle(fontSize: 24),
+                ),
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Image.asset(
-                    AppImages.cachorroImage,
-                    height: 150,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      AppImages.cachorroImage,
+                      height: 150,
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Image.asset(
-                    AppImages.gatoImage,
-                    height: 150,
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      AppImages.gatoImage,
+                      height: 150,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            Expanded(
-              child: Card(
+                ],
+              ),
+              Card(
                 color: Color(0xFFB9E5E8),
                 elevation: 4.0,
                 shape: RoundedRectangleBorder(
@@ -177,10 +190,40 @@ class _PetFormState extends State<PetForm> {
                       Padding(
                         padding: EdgeInsets.all(8.0),
                         child: TextField(
+                          controller: genderController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Gênero:',
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: TextField(
+                          controller: raceController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Raça:',
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: TextField(
+                          controller: categoryController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Categoria:',
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: TextField(
                           controller: imageController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
-                            labelText: 'Localização:',
+                            labelText: 'Imagem:',
                           ),
                         ),
                       ),
@@ -188,7 +231,8 @@ class _PetFormState extends State<PetForm> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           ElevatedButton(
-                            onPressed: submitPetForm, // Enviar os dados para a API
+                            onPressed:
+                                submitPetForm, // Enviar os dados para a API
                             child: Text("Cadastrar"),
                           ),
                           ElevatedButton(
@@ -207,8 +251,8 @@ class _PetFormState extends State<PetForm> {
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
