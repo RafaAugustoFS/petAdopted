@@ -3,6 +3,10 @@ class PetModel {
   final int age;
   final double weight;
   final String color;
+  final String gender;
+  final String breed;
+  final String category;
+  final String story;
   final List<String> images;
  
   PetModel({
@@ -10,6 +14,10 @@ class PetModel {
     required this.age,
     required this.weight,
     required this.color,
+    required this.gender,
+    required this.breed,
+    required this.category,
+    required this.story,
     required this.images,
   });
  
@@ -20,6 +28,10 @@ class PetModel {
       age: json['age'] ?? 0,           // Idade padrão
       weight: (json['weight'] ?? 0).toDouble(), // Peso padrão, convertido para double
       color: json['color'] ?? 'Unknown',
+      gender: json['gender'] ?? 'Unknown',
+      breed: json['breed'] ?? 'Unknown',
+      category: json['category'] ?? 'Unknown',
+      story: json['story'] ?? 'Unknown',
       images: List<String>.from(json['images'] ?? []), // Garante uma lista vazia se null
     );
   }
@@ -31,6 +43,10 @@ class PetModel {
       'age': age,
       'weight': weight,
       'color': color,
+      'gender': gender,
+      'breed': breed,
+      'category': category,
+      'story': story,
       'images': images,
     };
   }
@@ -43,10 +59,5 @@ class PetModel {
   /// Retorna uma descrição fixa ou personalizada para o pet.
   String get description {
     return "Este é um pet adorável que está à espera de um lar.";
-  }
- 
-  /// Retorna o gênero do pet, fixo ou baseado na lógica da aplicação.
-  String get gender {
-    return "Masculino"; // Exemplo fixo; ajuste conforme necessário
   }
 }

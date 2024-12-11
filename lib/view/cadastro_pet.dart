@@ -19,8 +19,9 @@ class _PetFormState extends State<PetForm> {
   TextEditingController weightController = TextEditingController();
   TextEditingController ageController = TextEditingController();
   TextEditingController genderController = TextEditingController();
-  TextEditingController raceController = TextEditingController();
+  TextEditingController breedController = TextEditingController();
   TextEditingController categoryController = TextEditingController();
+  TextEditingController storyController = TextEditingController();
   TextEditingController imageController = TextEditingController();
   List<PetModel> pets = [];
 
@@ -32,8 +33,9 @@ class _PetFormState extends State<PetForm> {
         weightController.text.isEmpty ||
         ageController.text.isEmpty ||
         genderController.text.isEmpty ||
-        raceController.text.isEmpty ||
+        breedController.text.isEmpty ||
         categoryController.text.isEmpty ||
+        storyController.text.isEmpty ||
         imageController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Por favor, preencha todos os campos.')),
@@ -61,8 +63,9 @@ class _PetFormState extends State<PetForm> {
       'weight': weightController.text,
       'age': ageController.text,
       'gender': genderController.text,
-      'race': raceController.text,
+      'breed': breedController.text,
       'category': categoryController.text,
+      'story': storyController.text,
       'images': imageController.text,
     });
 
@@ -200,7 +203,7 @@ class _PetFormState extends State<PetForm> {
                       Padding(
                         padding: EdgeInsets.all(8.0),
                         child: TextField(
-                          controller: raceController,
+                          controller: breedController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             labelText: 'Raça:',
@@ -214,6 +217,16 @@ class _PetFormState extends State<PetForm> {
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             labelText: 'Categoria:',
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: TextField(
+                          controller: storyController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'História:',
                           ),
                         ),
                       ),

@@ -37,7 +37,11 @@ class PetDetailPage extends StatelessWidget {
               infoCard(info: "Cor: ${pet.color}"),
               infoCard(info: "Idade: ${pet.age} anos"),
               infoCard(info: "Raça: ${pet.color}"),
-              infoCard(info: "Peso: ${pet.weight} kg")
+              infoCard(info: "Peso: ${pet.weight} kg"),
+              infoCard(info: "Raça: ${pet.breed}"),
+              infoCard(info: "Gênero: ${pet.gender}"),
+              infoCard(info: "Categoria: ${pet.category}"),
+              infoCard(info: "História: ${pet.story}")
             ],
           ),
         ),
